@@ -1,0 +1,3 @@
+[submodule "external/cppsocket"]
+	path = external/cppsocket
+	url = https://github.com/elnormous/cppsocket.git

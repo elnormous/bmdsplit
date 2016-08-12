@@ -1,0 +1,31 @@
+// BMD split
+
+#include <iostream>
+#include "BMDSplit.h"
+
+// TODO: create acceptor
+// TODO: handle connection
+// TODO: handle frames
+
+int main(int argc, const char* argv[])
+{
+    if (argc < 2)
+    {
+        std::cerr << "Too few arguments" << std::endl;
+
+        const char* exe = argc >= 1 ? argv[0] : "bmdsplit";
+        std::cerr << "Usage: " << exe << " <port> [video mode]" << std::endl;
+
+        return 1;
+    }
+
+    int32_t videoMode = 1;
+
+    if (argc >= 3)
+    {
+        videoMode = atoi(argv[2]);
+    }
+
+    BMDSplit bmdSplit;
+    return bmdSplit.run(videoMode) ? 0 : 1;
+}

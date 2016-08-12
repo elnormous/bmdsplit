@@ -1,0 +1,396 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		308491B11D5CCE4A00B7C515 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308491B01D5CCE4A00B7C515 /* main.cpp */; };
+		308491EB1D5CCFF200B7C515 /* DeckLinkAPIDispatch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308491E31D5CCFF200B7C515 /* DeckLinkAPIDispatch.cpp */; };
+		308491EF1D5CD03100B7C515 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 308491EE1D5CD03100B7C515 /* CoreFoundation.framework */; };
+		308492091D5E138400B7C515 /* BMDSplit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 308492071D5E138400B7C515 /* BMDSplit.cpp */; };
+		30BB18BD1D47A40B00102062 /* Acceptor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30BB18B51D47A40B00102062 /* Acceptor.cpp */; };
+		30BB18BE1D47A40B00102062 /* Connector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30BB18B71D47A40B00102062 /* Connector.cpp */; };
+		30BB18BF1D47A40B00102062 /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30BB18B91D47A40B00102062 /* Network.cpp */; };
+		30BB18C01D47A40B00102062 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 30BB18BB1D47A40B00102062 /* Socket.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		300934071C873DF200CC50D3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		300934091C873DF200CC50D3 /* bmdsplit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bmdsplit; sourceTree = BUILT_PRODUCTS_DIR; };
+		308491B01D5CCE4A00B7C515 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		308491D11D5CCFF200B7C515 /* DeckLinkAPI_v7_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v7_1.h; sourceTree = "<group>"; };
+		308491D21D5CCFF200B7C515 /* DeckLinkAPI_v7_3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v7_3.h; sourceTree = "<group>"; };
+		308491D31D5CCFF200B7C515 /* DeckLinkAPI_v7_6.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v7_6.h; sourceTree = "<group>"; };
+		308491D41D5CCFF200B7C515 /* DeckLinkAPI_v7_9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v7_9.h; sourceTree = "<group>"; };
+		308491D51D5CCFF200B7C515 /* DeckLinkAPI_v8_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v8_0.h; sourceTree = "<group>"; };
+		308491D61D5CCFF200B7C515 /* DeckLinkAPI_v8_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v8_1.h; sourceTree = "<group>"; };
+		308491D71D5CCFF200B7C515 /* DeckLinkAPI_v9_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v9_2.h; sourceTree = "<group>"; };
+		308491D81D5CCFF200B7C515 /* DeckLinkAPI_v9_9.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v9_9.h; sourceTree = "<group>"; };
+		308491D91D5CCFF200B7C515 /* DeckLinkAPI_v10_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v10_2.h; sourceTree = "<group>"; };
+		308491DA1D5CCFF200B7C515 /* DeckLinkAPI_v10_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI_v10_4.h; sourceTree = "<group>"; };
+		308491DB1D5CCFF200B7C515 /* DeckLinkAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPI.h; sourceTree = "<group>"; };
+		308491DC1D5CCFF200B7C515 /* DeckLinkAPIConfiguration_v10_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIConfiguration_v10_2.h; sourceTree = "<group>"; };
+		308491DD1D5CCFF200B7C515 /* DeckLinkAPIConfiguration_v10_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIConfiguration_v10_4.h; sourceTree = "<group>"; };
+		308491DE1D5CCFF200B7C515 /* DeckLinkAPIConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIConfiguration.h; sourceTree = "<group>"; };
+		308491DF1D5CCFF200B7C515 /* DeckLinkAPIDeckControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIDeckControl.h; sourceTree = "<group>"; };
+		308491E01D5CCFF200B7C515 /* DeckLinkAPIDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIDiscovery.h; sourceTree = "<group>"; };
+		308491E11D5CCFF200B7C515 /* DeckLinkAPIDispatch_v7_6.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeckLinkAPIDispatch_v7_6.cpp; sourceTree = "<group>"; };
+		308491E21D5CCFF200B7C515 /* DeckLinkAPIDispatch_v8_0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeckLinkAPIDispatch_v8_0.cpp; sourceTree = "<group>"; };
+		308491E31D5CCFF200B7C515 /* DeckLinkAPIDispatch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DeckLinkAPIDispatch.cpp; sourceTree = "<group>"; };
+		308491E51D5CCFF200B7C515 /* DeckLinkAPIModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIModes.h; sourceTree = "<group>"; };
+		308491E61D5CCFF200B7C515 /* DeckLinkAPIStreaming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIStreaming.h; sourceTree = "<group>"; };
+		308491E71D5CCFF200B7C515 /* DeckLinkAPITypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPITypes.h; sourceTree = "<group>"; };
+		308491E81D5CCFF200B7C515 /* DeckLinkAPIVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeckLinkAPIVersion.h; sourceTree = "<group>"; };
+		308491EE1D5CD03100B7C515 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		308492071D5E138400B7C515 /* BMDSplit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BMDSplit.cpp; sourceTree = "<group>"; };
+		308492081D5E138400B7C515 /* BMDSplit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDSplit.h; sourceTree = "<group>"; };
+		30BB18B51D47A40B00102062 /* Acceptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Acceptor.cpp; sourceTree = "<group>"; };
+		30BB18B61D47A40B00102062 /* Acceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Acceptor.h; sourceTree = "<group>"; };
+		30BB18B71D47A40B00102062 /* Connector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connector.cpp; sourceTree = "<group>"; };
+		30BB18B81D47A40B00102062 /* Connector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connector.h; sourceTree = "<group>"; };
+		30BB18B91D47A40B00102062 /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
+		30BB18BA1D47A40B00102062 /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		30BB18BB1D47A40B00102062 /* Socket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Socket.cpp; sourceTree = "<group>"; };
+		30BB18BC1D47A40B00102062 /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		300934061C873DF200CC50D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				308491EF1D5CD03100B7C515 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		300934001C873DF200CC50D3 = {
+			isa = PBXGroup;
+			children = (
+				3009340B1C873DF200CC50D3 /* bmdsplit */,
+				30513E281D37C61100F9B4BA /* cppsocket */,
+				308491B21D5CCE7800B7C515 /* DeckLinkAPI */,
+				308491ED1D5CD02200B7C515 /* Frameworks */,
+				3009340A1C873DF200CC50D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3009340A1C873DF200CC50D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				300934091C873DF200CC50D3 /* bmdsplit */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3009340B1C873DF200CC50D3 /* bmdsplit */ = {
+			isa = PBXGroup;
+			children = (
+				308491B01D5CCE4A00B7C515 /* main.cpp */,
+				308492071D5E138400B7C515 /* BMDSplit.cpp */,
+				308492081D5E138400B7C515 /* BMDSplit.h */,
+			);
+			name = bmdsplit;
+			path = src;
+			sourceTree = "<group>";
+		};
+		30513E281D37C61100F9B4BA /* cppsocket */ = {
+			isa = PBXGroup;
+			children = (
+				30BB18B51D47A40B00102062 /* Acceptor.cpp */,
+				30BB18B61D47A40B00102062 /* Acceptor.h */,
+				30BB18B71D47A40B00102062 /* Connector.cpp */,
+				30BB18B81D47A40B00102062 /* Connector.h */,
+				30BB18B91D47A40B00102062 /* Network.cpp */,
+				30BB18BA1D47A40B00102062 /* Network.h */,
+				30BB18BB1D47A40B00102062 /* Socket.cpp */,
+				30BB18BC1D47A40B00102062 /* Socket.h */,
+			);
+			name = cppsocket;
+			path = external/cppsocket;
+			sourceTree = "<group>";
+		};
+		308491B21D5CCE7800B7C515 /* DeckLinkAPI */ = {
+			isa = PBXGroup;
+			children = (
+				308491D11D5CCFF200B7C515 /* DeckLinkAPI_v7_1.h */,
+				308491D21D5CCFF200B7C515 /* DeckLinkAPI_v7_3.h */,
+				308491D31D5CCFF200B7C515 /* DeckLinkAPI_v7_6.h */,
+				308491D41D5CCFF200B7C515 /* DeckLinkAPI_v7_9.h */,
+				308491D51D5CCFF200B7C515 /* DeckLinkAPI_v8_0.h */,
+				308491D61D5CCFF200B7C515 /* DeckLinkAPI_v8_1.h */,
+				308491D71D5CCFF200B7C515 /* DeckLinkAPI_v9_2.h */,
+				308491D81D5CCFF200B7C515 /* DeckLinkAPI_v9_9.h */,
+				308491D91D5CCFF200B7C515 /* DeckLinkAPI_v10_2.h */,
+				308491DA1D5CCFF200B7C515 /* DeckLinkAPI_v10_4.h */,
+				308491DB1D5CCFF200B7C515 /* DeckLinkAPI.h */,
+				308491DC1D5CCFF200B7C515 /* DeckLinkAPIConfiguration_v10_2.h */,
+				308491DD1D5CCFF200B7C515 /* DeckLinkAPIConfiguration_v10_4.h */,
+				308491DE1D5CCFF200B7C515 /* DeckLinkAPIConfiguration.h */,
+				308491DF1D5CCFF200B7C515 /* DeckLinkAPIDeckControl.h */,
+				308491E01D5CCFF200B7C515 /* DeckLinkAPIDiscovery.h */,
+				308491E11D5CCFF200B7C515 /* DeckLinkAPIDispatch_v7_6.cpp */,
+				308491E21D5CCFF200B7C515 /* DeckLinkAPIDispatch_v8_0.cpp */,
+				308491E31D5CCFF200B7C515 /* DeckLinkAPIDispatch.cpp */,
+				308491E51D5CCFF200B7C515 /* DeckLinkAPIModes.h */,
+				308491E61D5CCFF200B7C515 /* DeckLinkAPIStreaming.h */,
+				308491E71D5CCFF200B7C515 /* DeckLinkAPITypes.h */,
+				308491E81D5CCFF200B7C515 /* DeckLinkAPIVersion.h */,
+			);
+			name = DeckLinkAPI;
+			path = BlackmagicDeckLinkSDK/Mac/include;
+			sourceTree = "<group>";
+		};
+		308491ED1D5CD02200B7C515 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				308491EE1D5CD03100B7C515 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		300934081C873DF200CC50D3 /* bmdsplit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 300934101C873DF200CC50D3 /* Build configuration list for PBXNativeTarget "bmdsplit" */;
+			buildPhases = (
+				300934051C873DF200CC50D3 /* Sources */,
+				300934061C873DF200CC50D3 /* Frameworks */,
+				300934071C873DF200CC50D3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bmdsplit;
+			productName = bmdsplit;
+			productReference = 300934091C873DF200CC50D3 /* bmdsplit */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		300934011C873DF200CC50D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Bool Games";
+				TargetAttributes = {
+					300934081C873DF200CC50D3 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 300934041C873DF200CC50D3 /* Build configuration list for PBXProject "bmdsplit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 300934001C873DF200CC50D3;
+			productRefGroup = 3009340A1C873DF200CC50D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				300934081C873DF200CC50D3 /* bmdsplit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		300934051C873DF200CC50D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				308492091D5E138400B7C515 /* BMDSplit.cpp in Sources */,
+				30BB18BD1D47A40B00102062 /* Acceptor.cpp in Sources */,
+				30BB18C01D47A40B00102062 /* Socket.cpp in Sources */,
+				30BB18BF1D47A40B00102062 /* Network.cpp in Sources */,
+				308491B11D5CCE4A00B7C515 /* main.cpp in Sources */,
+				30BB18BE1D47A40B00102062 /* Connector.cpp in Sources */,
+				308491EB1D5CCFF200B7C515 /* DeckLinkAPIDispatch.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3009340E1C873DF200CC50D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3009340F1C873DF200CC50D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_ASSIGN_ENUM = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		300934111C873DF200CC50D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					external/cppsocket,
+					"external/yaml-cpp/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Wold-style-cast";
+			};
+			name = Debug;
+		};
+		300934121C873DF200CC50D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					external/cppsocket,
+					"external/yaml-cpp/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Wold-style-cast";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		300934041C873DF200CC50D3 /* Build configuration list for PBXProject "bmdsplit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3009340E1C873DF200CC50D3 /* Debug */,
+				3009340F1C873DF200CC50D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		300934101C873DF200CC50D3 /* Build configuration list for PBXNativeTarget "bmdsplit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				300934111C873DF200CC50D3 /* Debug */,
+				300934121C873DF200CC50D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 300934011C873DF200CC50D3 /* Project object */;
+}
