@@ -3,12 +3,13 @@
 #pragma once
 
 #include <mutex>
+#include "Network.h"
 #include "DeckLinkAPI.h"
 
 class BMDSplit: public IDeckLinkInputCallback
 {
 public:
-    BMDSplit();
+    BMDSplit(cppsocket::Network& pNetwork);
     virtual ~BMDSplit() {}
 
     bool run(int32_t videoMode);
@@ -20,6 +21,8 @@ public:
     virtual HRESULT STDMETHODCALLTYPE VideoInputFrameArrived(IDeckLinkVideoInputFrame*, IDeckLinkAudioInputPacket*);
 
 protected:
+    cppsocket::Network& network;
+
     ULONG refCount;
     std::mutex dataMutex;
 

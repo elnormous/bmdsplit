@@ -26,6 +26,8 @@ int main(int argc, const char* argv[])
         videoMode = atoi(argv[2]);
     }
 
-    BMDSplit bmdSplit;
+    cppsocket::Network network;
+
+    BMDSplit bmdSplit(network);
     return bmdSplit.run(videoMode) ? 0 : 1;
 }

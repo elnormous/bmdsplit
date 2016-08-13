@@ -3,7 +3,8 @@
 #include <iostream>
 #include "BMDSplit.h"
 
-BMDSplit::BMDSplit()
+BMDSplit::BMDSplit(cppsocket::Network& pNetwork):
+    network(pNetwork)
 {
 }
 
