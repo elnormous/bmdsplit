@@ -4,7 +4,7 @@
 #include "BMDSplit.h"
 
 BMDSplit::BMDSplit(cppsocket::Network& pNetwork):
-    network(pNetwork)
+    network(pNetwork), socket(pNetwork)
 {
 }
 
@@ -78,8 +78,8 @@ bool BMDSplit::run(int32_t videoMode)
         return false;
     }
 
-    static int audioChannels       = 2;
-    static int audioSampleDepth    = 16;
+    static uint32_t audioChannels = 2;
+    static BMDAudioSampleType audioSampleDepth = bmdAudioSampleType16bitInteger;
 
     result = deckLinkInput->EnableAudioInput(bmdAudioSampleRate48kHz,
                                              audioSampleDepth,
@@ -90,11 +90,16 @@ bool BMDSplit::run(int32_t videoMode)
         return false;
     }
 
+    displayMode->GetFrameRate(&frameDuration, &timeScale);
+
     result = deckLinkInput->StartStreams();
     if (result != S_OK)
     {
         return false;
     }
+
+    socket.setAcceptCallback(std::bind(&BMDSplit::acceptCallback, this, std::placeholders::_1));
+    socket.startAccept(8002);
 
     return true;
 }
@@ -122,8 +127,40 @@ ULONG BMDSplit::Release(void)
     return refCount;
 }
 
-HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame, IDeckLinkAudioInputPacket* audioFrame)
+HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
+                                         IDeckLinkAudioInputPacket* audioFrame)
 {
+    BMDTimeValue timestamp;
+
+    if (videoFrame)
+    {
+        if (videoFrame->GetFlags() & static_cast<BMDFrameFlags>(bmdFrameHasNoInputSource))
+        {
+            return S_OK;
+        }
+        else
+        {
+            BMDTimeValue duration;
+
+            uint8_t* frameData;
+            videoFrame->GetBytes(reinterpret_cast<void**>(&frameData));
+            videoFrame->GetStreamTime(&timestamp, &duration, timeScale);
+
+            // send it to all clients
+        }
+    }
+
+    if (audioFrame)
+    {
+        uint8_t* frameData;
+
+        long sampleFrameCount = audioFrame->GetSampleFrameCount();
+        audioFrame->GetBytes(reinterpret_cast<void**>(&frameData));
+        audioFrame->GetPacketTime(&timestamp, 48000);
+
+        // send it to all clients
+    }
+
     return S_OK;
 }
 
@@ -131,4 +168,9 @@ HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents event
                                           BMDDetectedVideoInputFormatFlags)
 {
     return S_OK;
+}
+
+void BMDSplit::acceptCallback(cppsocket::Socket& client)
+{
+    clients.push_back(std::move(client));
 }
