@@ -19,6 +19,8 @@ int main(int argc, const char* argv[])
         return 1;
     }
 
+    uint16_t port = static_cast<uint16_t>(atoi(argv[1]));
+
     int32_t videoMode = 1;
 
     if (argc >= 3)
@@ -28,6 +30,6 @@ int main(int argc, const char* argv[])
 
     cppsocket::Network network;
 
-    BMDSplit bmdSplit(network);
+    BMDSplit bmdSplit(network, port);
     return bmdSplit.run(videoMode) ? 0 : 1;
 }

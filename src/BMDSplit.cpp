@@ -3,8 +3,8 @@
 #include <iostream>
 #include "BMDSplit.h"
 
-BMDSplit::BMDSplit(cppsocket::Network& pNetwork):
-    network(pNetwork), socket(pNetwork)
+BMDSplit::BMDSplit(cppsocket::Network& pNetwork, uint16_t pPort):
+    network(pNetwork), port(pPort), socket(pNetwork)
 {
 }
 
@@ -99,12 +99,12 @@ bool BMDSplit::run(int32_t videoMode)
     }
 
     socket.setAcceptCallback(std::bind(&BMDSplit::acceptCallback, this, std::placeholders::_1));
-    socket.startAccept(8002);
+    socket.startAccept(port);
 
     return true;
 }
 
-ULONG BMDSplit::AddRef(void)
+ULONG BMDSplit::AddRef()
 {
     std::lock_guard<std::mutex> lock(dataMutex);
 
@@ -113,7 +113,7 @@ ULONG BMDSplit::AddRef(void)
     return refCount;
 }
 
-ULONG BMDSplit::Release(void)
+ULONG BMDSplit::Release()
 {
     std::lock_guard<std::mutex> lock(dataMutex);
     refCount--;
@@ -146,7 +146,17 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             videoFrame->GetBytes(reinterpret_cast<void**>(&frameData));
             videoFrame->GetStreamTime(&timestamp, &duration, timeScale);
 
+            videoFrame->GetWidth();
+            videoFrame->GetHeight();
+            videoFrame->GetRowBytes();
+
+            std::vector<uint8_t> data;
+
             // send it to all clients
+            for (cppsocket::Socket& client : clients)
+            {
+                client.send(data);
+            }
         }
     }
 
@@ -158,13 +168,20 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
         audioFrame->GetBytes(reinterpret_cast<void**>(&frameData));
         audioFrame->GetPacketTime(&timestamp, 48000);
 
+        std::vector<uint8_t> data;
+        
+
         // send it to all clients
+        for (cppsocket::Socket& client : clients)
+        {
+            client.send(data);
+        }
     }
 
     return S_OK;
 }
 
-HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents events, IDeckLinkDisplayMode *mode,
+HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode*,
                                           BMDDetectedVideoInputFormatFlags)
 {
     return S_OK;
@@ -172,5 +189,8 @@ HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents event
 
 void BMDSplit::acceptCallback(cppsocket::Socket& client)
 {
+    client.setCloseCallback([&client] {
+        std::cout << "Client disconnected\n";
+    });
     clients.push_back(std::move(client));
 }
