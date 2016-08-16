@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "BMDSplit.h"
+#include "Utils.h"
 
 BMDSplit::BMDSplit(cppsocket::Network& pNetwork, uint16_t pPort):
     network(pNetwork), port(pPort), socket(pNetwork)
@@ -78,9 +79,6 @@ bool BMDSplit::run(int32_t videoMode)
         return false;
     }
 
-    static uint32_t audioChannels = 2;
-    static BMDAudioSampleType audioSampleDepth = bmdAudioSampleType16bitInteger;
-
     result = deckLinkInput->EnableAudioInput(audioSampleRate,
                                              audioSampleDepth,
                                              audioChannels);
@@ -146,11 +144,16 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             videoFrame->GetBytes(reinterpret_cast<void**>(&frameData));
             videoFrame->GetStreamTime(&timestamp, &duration, timeScale);
 
-            videoFrame->GetWidth();
-            videoFrame->GetHeight();
-            videoFrame->GetRowBytes();
+            uint32_t width = static_cast<uint32_t>(videoFrame->GetWidth());
+            uint32_t height = static_cast<uint32_t>(videoFrame->GetHeight());
+            uint32_t stride = static_cast<uint32_t>(videoFrame->GetRowBytes());
 
             std::vector<uint8_t> data;
+            encodeInt(data, sizeof(width), width);
+            encodeInt(data, sizeof(height), height);
+            encodeInt(data, sizeof(stride), stride);
+            encodeInt(data, sizeof(timestamp), timestamp);
+            data.insert(data.end(), frameData, frameData + height * stride);
 
             // send it to all clients
             for (cppsocket::Socket& client : clients)
@@ -169,7 +172,8 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
         audioFrame->GetPacketTime(&timestamp, audioSampleRate);
 
         std::vector<uint8_t> data;
-        
+        encodeInt(data, sizeof(timestamp), timestamp);
+        data.insert(data.end(), frameData, frameData + sampleFrameCount * audioChannels * (audioSampleDepth / 8));
 
         // send it to all clients
         for (cppsocket::Socket& client : clients)

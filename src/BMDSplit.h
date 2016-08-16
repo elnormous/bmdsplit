@@ -43,4 +43,6 @@ protected:
     BMDTimeValue timeScale = 0;
 
     BMDAudioSampleRate audioSampleRate = bmdAudioSampleRate48kHz;
+    BMDAudioSampleType audioSampleDepth = bmdAudioSampleType16bitInteger;
+    uint32_t audioChannels = 2;
 };

@@ -3,10 +3,6 @@
 #include <iostream>
 #include "BMDSplit.h"
 
-// TODO: create acceptor
-// TODO: handle connection
-// TODO: handle frames
-
 int main(int argc, const char* argv[])
 {
     if (argc < 2)

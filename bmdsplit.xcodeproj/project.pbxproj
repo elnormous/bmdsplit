@@ -58,6 +58,7 @@
 		308491EE1D5CD03100B7C515 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		308492071D5E138400B7C515 /* BMDSplit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BMDSplit.cpp; sourceTree = "<group>"; };
 		308492081D5E138400B7C515 /* BMDSplit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMDSplit.h; sourceTree = "<group>"; };
+		308493A01D635CF000B7C515 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		30BB18B51D47A40B00102062 /* Acceptor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Acceptor.cpp; sourceTree = "<group>"; };
 		30BB18B61D47A40B00102062 /* Acceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Acceptor.h; sourceTree = "<group>"; };
 		30BB18B71D47A40B00102062 /* Connector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connector.cpp; sourceTree = "<group>"; };
@@ -102,9 +103,10 @@
 		3009340B1C873DF200CC50D3 /* bmdsplit */ = {
 			isa = PBXGroup;
 			children = (
-				308491B01D5CCE4A00B7C515 /* main.cpp */,
 				308492071D5E138400B7C515 /* BMDSplit.cpp */,
 				308492081D5E138400B7C515 /* BMDSplit.h */,
+				308491B01D5CCE4A00B7C515 /* main.cpp */,
+				308493A01D635CF000B7C515 /* Utils.h */,
 			);
 			name = bmdsplit;
 			path = src;
