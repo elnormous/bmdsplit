@@ -11,6 +11,15 @@ BMDSplit::BMDSplit(cppsocket::Network& pNetwork, uint16_t pPort):
 {
 }
 
+BMDSplit::~BMDSplit()
+{
+    if (deckLinkConfiguration) deckLinkConfiguration->Release();
+    if (displayMode) displayMode->Release();
+    if (displayModeIterator) displayModeIterator->Release();
+    if (deckLinkInput) deckLinkInput->Release();
+    if (deckLink) deckLink->Release();
+}
+
 bool BMDSplit::run(int32_t videoMode)
 {
     IDeckLinkIterator* deckLinkIterator = CreateDeckLinkIteratorInstance();
@@ -61,8 +70,6 @@ bool BMDSplit::run(int32_t videoMode)
 
     int displayModeCount = 0;
 
-    BMDDisplayMode selectedDisplayMode = bmdModeNTSC;
-
     while (displayModeIterator->Next(&displayMode) == S_OK)
     {
         if (videoMode == -1 || videoMode == displayModeCount)
@@ -72,11 +79,21 @@ bool BMDSplit::run(int32_t videoMode)
         }
         displayModeCount++;
         displayMode->Release();
+        displayMode = nullptr;
     }
 
-    BMDPixelFormat pix = bmdFormat8BitYUV;
+    if (!displayMode)
+    {
+        std::cerr << "Failed to find display mode\n";
+        return false;
+    }
 
-    result = deckLinkInput->EnableVideoInput(selectedDisplayMode, pix, 0);
+    width = static_cast<uint32_t>(displayMode->GetWidth());
+    height = static_cast<uint32_t>(displayMode->GetHeight());
+    displayMode->GetFrameRate(&frameDuration, &timeScale);
+    fieldDominance = displayMode->GetFieldDominance();
+
+    result = deckLinkInput->EnableVideoInput(selectedDisplayMode, pixelFormat, 0);
     if (result != S_OK)
     {
         std::cerr << "Failed to enable video input\n";
@@ -91,8 +108,6 @@ bool BMDSplit::run(int32_t videoMode)
         std::cerr << "Failed to enable audio input\n";
         return false;
     }
-
-    displayMode->GetFrameRate(&frameDuration, &timeScale);
 
     result = deckLinkInput->StartStreams();
     if (result != S_OK)
@@ -148,16 +163,13 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             videoFrame->GetBytes(reinterpret_cast<void**>(&frameData));
             videoFrame->GetStreamTime(&timestamp, &duration, timeScale);
 
-            uint32_t width = static_cast<uint32_t>(videoFrame->GetWidth());
-            uint32_t height = static_cast<uint32_t>(videoFrame->GetHeight());
+            //uint32_t frameWidth = static_cast<uint32_t>(videoFrame->GetWidth());
+            uint32_t frameHeight = static_cast<uint32_t>(videoFrame->GetHeight());
             uint32_t stride = static_cast<uint32_t>(videoFrame->GetRowBytes());
 
             std::vector<uint8_t> data;
-            encodeInt(data, sizeof(width), width);
-            encodeInt(data, sizeof(height), height);
-            encodeInt(data, sizeof(stride), stride);
             encodeInt(data, sizeof(timestamp), timestamp);
-            data.insert(data.end(), frameData, frameData + height * stride);
+            data.insert(data.end(), frameData, frameData + frameHeight * stride);
 
             // send it to all clients
             for (cppsocket::Socket& client : clients)
@@ -200,5 +212,17 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
     client.setCloseCallback([&client] {
         std::cout << "Client disconnected\n";
     });
+
+    std::vector<uint8_t> data;
+    encodeInt(data, sizeof(width), width);
+    encodeInt(data, sizeof(height), height);
+    encodeInt(data, sizeof(frameDuration), frameDuration); // numerator
+    encodeInt(data, sizeof(timeScale), timeScale); // denumerator
+    encodeInt(data, sizeof(fieldDominance), fieldDominance);
+    encodeInt(data, sizeof(audioSampleRate), audioSampleRate);
+    encodeInt(data, sizeof(audioSampleDepth), audioSampleDepth);
+    encodeInt(data, sizeof(audioChannels), audioChannels);
+    client.send(data);
+
     clients.push_back(std::move(client));
 }

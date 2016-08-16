@@ -13,7 +13,7 @@ class BMDSplit: public IDeckLinkInputCallback
 {
 public:
     BMDSplit(cppsocket::Network& pNetwork, uint16_t pPort);
-    virtual ~BMDSplit() {}
+    virtual ~BMDSplit();
 
     bool run(int32_t videoMode);
 
@@ -35,14 +35,19 @@ protected:
     ULONG refCount;
     std::mutex dataMutex;
 
-    IDeckLink* deckLink;
-    IDeckLinkInput* deckLinkInput;
-    IDeckLinkDisplayModeIterator* displayModeIterator;
-    IDeckLinkDisplayMode* displayMode;
-    IDeckLinkConfiguration* deckLinkConfiguration;
+    IDeckLink* deckLink = nullptr;
+    IDeckLinkInput* deckLinkInput = nullptr;
+    IDeckLinkDisplayModeIterator* displayModeIterator = nullptr;
+    IDeckLinkDisplayMode* displayMode = nullptr;
+    IDeckLinkConfiguration* deckLinkConfiguration = nullptr;
 
+    BMDDisplayMode selectedDisplayMode = bmdModeNTSC;
+    BMDPixelFormat pixelFormat = bmdFormat8BitYUV;
+    uint32_t width;
+    uint32_t height;
     BMDTimeValue frameDuration = 0;
     BMDTimeValue timeScale = 0;
+    BMDFieldDominance fieldDominance;
 
     BMDAudioSampleRate audioSampleRate = bmdAudioSampleRate48kHz;
     BMDAudioSampleType audioSampleDepth = bmdAudioSampleType16bitInteger;
