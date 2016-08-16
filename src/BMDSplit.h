@@ -41,4 +41,6 @@ protected:
 
     BMDTimeValue frameDuration = 0;
     BMDTimeValue timeScale = 0;
+
+    BMDAudioSampleRate audioSampleRate = bmdAudioSampleRate48kHz;
 };

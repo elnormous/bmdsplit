@@ -81,7 +81,7 @@ bool BMDSplit::run(int32_t videoMode)
     static uint32_t audioChannels = 2;
     static BMDAudioSampleType audioSampleDepth = bmdAudioSampleType16bitInteger;
 
-    result = deckLinkInput->EnableAudioInput(bmdAudioSampleRate48kHz,
+    result = deckLinkInput->EnableAudioInput(audioSampleRate,
                                              audioSampleDepth,
                                              audioChannels);
     if (result != S_OK)
@@ -166,7 +166,7 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
 
         long sampleFrameCount = audioFrame->GetSampleFrameCount();
         audioFrame->GetBytes(reinterpret_cast<void**>(&frameData));
-        audioFrame->GetPacketTime(&timestamp, 48000);
+        audioFrame->GetPacketTime(&timestamp, audioSampleRate);
 
         std::vector<uint8_t> data;
         
