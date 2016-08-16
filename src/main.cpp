@@ -1,4 +1,6 @@
-// BMD split
+//
+//  BMD split
+//
 
 #include <iostream>
 #include "BMDSplit.h"

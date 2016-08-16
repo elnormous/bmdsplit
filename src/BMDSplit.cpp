@@ -1,4 +1,6 @@
-// BMD split
+//
+//  BMD split
+//
 
 #include <iostream>
 #include "BMDSplit.h"
@@ -33,13 +35,15 @@ bool BMDSplit::run(int32_t videoMode)
         return false;
     }
 
-    if (deckLink->QueryInterface(IID_IDeckLinkInput, (void**)&deckLinkInput) != S_OK)
+    result = deckLink->QueryInterface(IID_IDeckLinkInput,
+                                      reinterpret_cast<void**>(&deckLinkInput));
+    if (result != S_OK)
     {
         return false;
     }
 
     result = deckLink->QueryInterface(IID_IDeckLinkConfiguration,
-                                      (void **)&deckLinkConfiguration);
+                                      reinterpret_cast<void**>(&deckLinkConfiguration));
     if (result != S_OK)
     {
         std::cerr << "Could not obtain the IDeckLinkConfiguration interface - result = " << result << "\n";
