@@ -42,7 +42,7 @@ EXECUTABLE=bmdsplit
 
 all: directories $(SOURCES) $(EXECUTABLE)
 
-debug: CXXFLAGS += -DDEBUG -g
+debug: CXXFLAGS+=-DDEBUG -g
 debug: directories $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
