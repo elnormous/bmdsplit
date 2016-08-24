@@ -24,7 +24,7 @@ endif
 
 BINDIR := ./bin
 CPPFLAGS=-c -std=c++11 -Wall -I external/cppsocket -I $(SDK_PATH) -o $(BINDIR)/$@
-LDFLAGS=-lpthread
+LDFLAGS=-lpthread -ldl
 SOURCES=external/cppsocket/Acceptor.cpp \
 	external/cppsocket/Connector.cpp \
 	external/cppsocket/Network.cpp \
