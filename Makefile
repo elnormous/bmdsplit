@@ -22,9 +22,12 @@ ifndef SDK_PATH
     endif
 endif
 
-BINDIR=./bin
 CXXFLAGS=-c -std=c++11 -Wall -I external/cppsocket -I $(SDK_PATH)
 LDFLAGS=-lpthread -ldl
+ifeq ($(platform),macos)
+LDFLAGS+=-framework CoreFoundation
+endif
+
 SOURCES=external/cppsocket/Acceptor.cpp \
 	external/cppsocket/Connector.cpp \
 	external/cppsocket/Network.cpp \
@@ -34,16 +37,12 @@ SOURCES=external/cppsocket/Acceptor.cpp \
 	src/BMDSplit.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 
-ifeq ($(platform),macos)
-LDFLAGS+=-framework CoreFoundation
-endif
-
+BINDIR=./bin
 EXECUTABLE=bmdsplit
 
 all: directories $(SOURCES) $(EXECUTABLE)
 
 debug: CXXFLAGS += -DDEBUG -g
-debug: CCFLAGS += -DDEBUG -g
 debug: directories $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
