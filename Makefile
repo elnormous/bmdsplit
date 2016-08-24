@@ -47,10 +47,10 @@ debug: CCFLAGS += -DDEBUG -g
 debug: directories $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
+	$(CXX) $(OBJECTS) $(LDFLAGS) -o $(BINDIR)/$@
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) $< -o $(BINDIR)/$@
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 .PHONY: clean
 
