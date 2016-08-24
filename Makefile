@@ -23,7 +23,7 @@ ifndef SDK_PATH
 endif
 
 BINDIR=./bin
-CPPFLAGS=-c -std=c++11 -Wall -I external/cppsocket -I $(SDK_PATH) -o $(BINDIR)/$@
+CXXFLAGS=-c -std=c++11 -Wall -I external/cppsocket -I $(SDK_PATH)
 LDFLAGS=-lpthread -ldl
 SOURCES=external/cppsocket/Acceptor.cpp \
 	external/cppsocket/Connector.cpp \
@@ -50,7 +50,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CXX) $(OBJECTS) $(LDFLAGS) -o $@
 
 .cpp.o:
-	$(CXX) $(CPPFLAGS) $< -o $@
+	$(CXX) $(CXXFLAGS) $< -o $(BINDIR)/$@
 
 .PHONY: clean
 
