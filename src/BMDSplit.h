@@ -26,6 +26,7 @@ public:
 
 protected:
     void acceptCallback(cppsocket::Socket& client);
+    void sendMetaData(cppsocket::Socket& client);
 
     cppsocket::Network& network;
     uint16_t port;

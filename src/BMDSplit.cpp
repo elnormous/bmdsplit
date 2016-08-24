@@ -148,6 +148,12 @@ ULONG BMDSplit::Release()
     return refCount;
 }
 
+HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode*,
+                                          BMDDetectedVideoInputFormatFlags)
+{
+    return S_OK;
+}
+
 HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
                                          IDeckLinkAudioInputPacket* audioFrame)
 {
@@ -171,10 +177,21 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             uint32_t frameHeight = static_cast<uint32_t>(videoFrame->GetHeight());
             uint32_t stride = static_cast<uint32_t>(videoFrame->GetRowBytes());
 
+            uint32_t dataSize = frameHeight * stride;
+
+            uint32_t packetSize = sizeof(VIDEO_DATA) +
+                sizeof(timestamp) +
+                sizeof(frameHeight) +
+                sizeof(stride) +
+                dataSize;
+
             std::vector<uint8_t> data;
+            encodeInt(data, sizeof(packetSize), packetSize);
             data.push_back(VIDEO_DATA);
             encodeInt(data, sizeof(timestamp), timestamp);
-            data.insert(data.end(), frameData, frameData + frameHeight * stride);
+            encodeInt(data, sizeof(frameHeight), frameHeight);
+            encodeInt(data, sizeof(stride), stride);
+            data.insert(data.end(), frameData, frameData + dataSize);
 
             // send it to all clients
             for (cppsocket::Socket& client : clients)
@@ -188,14 +205,24 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
     {
         uint8_t* frameData;
 
-        long sampleFrameCount = audioFrame->GetSampleFrameCount();
         audioFrame->GetBytes(reinterpret_cast<void**>(&frameData));
         audioFrame->GetPacketTime(&timestamp, audioSampleRate);
 
+        uint32_t sampleFrameCount = static_cast<uint32_t>(audioFrame->GetSampleFrameCount());
+
+        uint32_t dataSize = sampleFrameCount * audioChannels * (audioSampleDepth / 8);
+
+        uint32_t packetSize = sizeof(AUDIO_DATA) +
+            sizeof(timestamp) +
+            sizeof(sampleFrameCount) +
+            dataSize;
+
         std::vector<uint8_t> data;
+        encodeInt(data, sizeof(packetSize), packetSize);
         data.push_back(AUDIO_DATA);
         encodeInt(data, sizeof(timestamp), timestamp);
-        data.insert(data.end(), frameData, frameData + sampleFrameCount * audioChannels * (audioSampleDepth / 8));
+        encodeInt(data, sizeof(sampleFrameCount), sampleFrameCount);
+        data.insert(data.end(), frameData, frameData + dataSize);
 
         // send it to all clients
         for (cppsocket::Socket& client : clients)
@@ -207,19 +234,23 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
     return S_OK;
 }
 
-HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode*,
-                                          BMDDetectedVideoInputFormatFlags)
-{
-    return S_OK;
-}
-
 void BMDSplit::acceptCallback(cppsocket::Socket& client)
 {
     client.setCloseCallback([&client] {
         std::cout << "Client disconnected\n";
     });
 
+    uint32_t packetSize = sizeof(uint32_t) + //width
+        sizeof(uint32_t) + // height
+        sizeof(frameDuration) +
+        sizeof(timeScale) +
+        sizeof(fieldDominance) +
+        sizeof(audioSampleRate) +
+        sizeof(audioSampleDepth) +
+        sizeof(audioChannels);
+
     std::vector<uint8_t> data;
+    encodeInt(data, sizeof(packetSize), packetSize);
     data.push_back(META_DATA);
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(width));
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(height));
