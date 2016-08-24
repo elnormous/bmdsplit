@@ -43,8 +43,8 @@ protected:
 
     BMDDisplayMode selectedDisplayMode = bmdModeNTSC;
     BMDPixelFormat pixelFormat = bmdFormat8BitYUV;
-    uint32_t width;
-    uint32_t height;
+    long width;
+    long height;
     BMDTimeValue frameDuration = 0;
     BMDTimeValue timeScale = 0;
     BMDFieldDominance fieldDominance;

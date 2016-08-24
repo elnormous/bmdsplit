@@ -88,8 +88,8 @@ bool BMDSplit::run(int32_t videoMode)
         return false;
     }
 
-    width = static_cast<uint32_t>(displayMode->GetWidth());
-    height = static_cast<uint32_t>(displayMode->GetHeight());
+    width = displayMode->GetWidth();
+    height = displayMode->GetHeight();
     displayMode->GetFrameRate(&frameDuration, &timeScale);
     fieldDominance = displayMode->GetFieldDominance();
 
@@ -214,8 +214,8 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
     });
 
     std::vector<uint8_t> data;
-    encodeInt(data, sizeof(width), width);
-    encodeInt(data, sizeof(height), height);
+    encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(width));
+    encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(height));
     encodeInt(data, sizeof(frameDuration), frameDuration); // numerator
     encodeInt(data, sizeof(timeScale), timeScale); // denumerator
     encodeInt(data, sizeof(fieldDominance), fieldDominance);
