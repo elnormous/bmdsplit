@@ -148,9 +148,21 @@ ULONG BMDSplit::Release()
     return refCount;
 }
 
-HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode*,
+HRESULT BMDSplit::VideoInputFormatChanged(BMDVideoInputFormatChangedEvents, IDeckLinkDisplayMode* newDisplayMode,
                                           BMDDetectedVideoInputFormatFlags)
 {
+    displayMode = newDisplayMode;
+    width = displayMode->GetWidth();
+    height = displayMode->GetHeight();
+    displayMode->GetFrameRate(&frameDuration, &timeScale);
+    fieldDominance = displayMode->GetFieldDominance();
+
+    // send meta data to all clients
+    for (cppsocket::Socket& client : clients)
+    {
+        sendMetaData(client);
+    }
+
     return S_OK;
 }
 
@@ -240,6 +252,13 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
         std::cout << "Client disconnected\n";
     });
 
+    sendMetaData(client);
+
+    clients.push_back(std::move(client));
+}
+
+void BMDSplit::sendMetaData(cppsocket::Socket& client)
+{
     uint32_t packetSize = sizeof(uint32_t) + //width
         sizeof(uint32_t) + // height
         sizeof(frameDuration) +
@@ -261,6 +280,4 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
     encodeInt(data, sizeof(audioSampleDepth), audioSampleDepth);
     encodeInt(data, sizeof(audioChannels), audioChannels);
     client.send(data);
-
-    clients.push_back(std::move(client));
 }
