@@ -6,6 +6,10 @@
 #include "BMDSplit.h"
 #include "Utils.h"
 
+const uint8_t META_DATA = 0;
+const uint8_t VIDEO_DATA = 1;
+const uint8_t AUDIO_DATA = 2;
+
 BMDSplit::BMDSplit(cppsocket::Network& pNetwork, uint16_t pPort):
     network(pNetwork), port(pPort), socket(pNetwork)
 {
@@ -168,6 +172,7 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             uint32_t stride = static_cast<uint32_t>(videoFrame->GetRowBytes());
 
             std::vector<uint8_t> data;
+            data.push_back(VIDEO_DATA);
             encodeInt(data, sizeof(timestamp), timestamp);
             data.insert(data.end(), frameData, frameData + frameHeight * stride);
 
@@ -188,6 +193,7 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
         audioFrame->GetPacketTime(&timestamp, audioSampleRate);
 
         std::vector<uint8_t> data;
+        data.push_back(AUDIO_DATA);
         encodeInt(data, sizeof(timestamp), timestamp);
         data.insert(data.end(), frameData, frameData + sampleFrameCount * audioChannels * (audioSampleDepth / 8));
 
@@ -214,6 +220,7 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
     });
 
     std::vector<uint8_t> data;
+    data.push_back(META_DATA);
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(width));
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(height));
     encodeInt(data, sizeof(frameDuration), frameDuration); // numerator
