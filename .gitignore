@@ -1,2 +1,4 @@
 bmdsplit.xcodeproj/project.xcworkspace
 bmdsplit.xcodeproj/xcuserdata
+bmdsplit
+*.o

@@ -47,7 +47,7 @@ protected:
     long width;
     long height;
     BMDTimeValue frameDuration = 0;
-    BMDTimeValue timeScale = 0;
+    BMDTimeScale timeScale = 0;
     BMDFieldDominance fieldDominance;
 
     BMDAudioSampleRate audioSampleRate = bmdAudioSampleRate48kHz;
