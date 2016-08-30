@@ -259,7 +259,8 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
 
 void BMDSplit::sendMetaData(cppsocket::Socket& client)
 {
-    uint32_t packetSize = sizeof(uint32_t) + //width
+    uint32_t packetSize = sizeof(META_DATA) +
+        sizeof(uint32_t) + //width
         sizeof(uint32_t) + // height
         sizeof(frameDuration) +
         sizeof(timeScale) +
