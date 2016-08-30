@@ -260,6 +260,7 @@ void BMDSplit::acceptCallback(cppsocket::Socket& client)
 void BMDSplit::sendMetaData(cppsocket::Socket& client)
 {
     uint32_t packetSize = sizeof(META_DATA) +
+        sizeof(pixelFormat) + //width
         sizeof(uint32_t) + //width
         sizeof(uint32_t) + // height
         sizeof(frameDuration) +
@@ -272,6 +273,7 @@ void BMDSplit::sendMetaData(cppsocket::Socket& client)
     std::vector<uint8_t> data;
     encodeInt(data, sizeof(packetSize), packetSize);
     data.push_back(META_DATA);
+    encodeInt(data, sizeof(pixelFormat), pixelFormat);
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(width));
     encodeInt(data, sizeof(uint32_t), static_cast<uint32_t>(height));
     encodeInt(data, sizeof(frameDuration), frameDuration); // numerator
