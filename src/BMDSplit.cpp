@@ -193,6 +193,7 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
 
             uint32_t packetSize = sizeof(VIDEO_DATA) +
                 sizeof(timestamp) +
+                sizeof(duration) +
                 sizeof(frameHeight) +
                 sizeof(stride) +
                 dataSize;
@@ -201,6 +202,7 @@ HRESULT BMDSplit::VideoInputFrameArrived(IDeckLinkVideoInputFrame* videoFrame,
             encodeInt(data, sizeof(packetSize), packetSize);
             data.push_back(VIDEO_DATA);
             encodeInt(data, sizeof(timestamp), timestamp);
+            encodeInt(data, sizeof(duration), duration);
             encodeInt(data, sizeof(frameHeight), frameHeight);
             encodeInt(data, sizeof(stride), stride);
             data.insert(data.end(), frameData, frameData + dataSize);
